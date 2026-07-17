@@ -2,7 +2,7 @@ import os
 from dotenv import load_dotenv
 
 from agno.agent import Agent
-from agno.models.groq import GroqChat
+from agno.models.openai.like import OpenAILike
 
 load_dotenv()
 
@@ -31,7 +31,11 @@ def _crear_agente():
 
     return Agent(
         name="Tutor IA",
-        model=GroqChat(id=model, api_key=api_key),
+        model=OpenAILike(
+            id=model,
+            base_url="https://api.groq.com/openai/v1",
+            api_key=api_key,
+        ),
         instructions=[
             "Responde siempre en español.",
             "Explica el tema de forma sencilla.",
