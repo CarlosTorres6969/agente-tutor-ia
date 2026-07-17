@@ -39,8 +39,7 @@ if st.button("Explicar tema", type="primary"):
                 respuesta = agente.run(mensaje)
                 st.markdown(respuesta.content)
             except Exception as e:
-                st.error(f"Error al conectar con OpenAI: {e}")
+                st.error(f"Error al conectar con Groq: {e}")
                 st.info(
-                    "Verifica que la clave de API de OpenAI sea correcta "
-                    "y que tengas crédito disponible."
+                    "Verifica que la clave de API de Groq sea correcta."
                 )

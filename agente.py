@@ -2,7 +2,7 @@ import os
 from dotenv import load_dotenv
 
 from agno.agent import Agent
-from agno.models.openai import OpenAIChat
+from agno.models.groq import GroqChat
 
 load_dotenv()
 
@@ -19,19 +19,19 @@ def _get_secret(key: str, default: str | None = None) -> str | None:
 
 
 def _crear_agente():
-    api_key = _get_secret("OPENAI_API_KEY")
-    model = _get_secret("OPENAI_MODEL") or "gpt-4o-mini"
+    api_key = _get_secret("GROQ_API_KEY")
+    model = _get_secret("GROQ_MODEL") or "llama-3.3-70b-versatile"
 
     if not api_key:
         raise ValueError(
-            "OPENAI_API_KEY no encontrada. "
+            "GROQ_API_KEY no encontrada. "
             "Configúrala en los secrets de Streamlit Cloud "
             "o en el archivo .env para ejecución local."
         )
 
     return Agent(
         name="Tutor IA",
-        model=OpenAIChat(id=model, api_key=api_key),
+        model=GroqChat(id=model, api_key=api_key),
         instructions=[
             "Responde siempre en español.",
             "Explica el tema de forma sencilla.",
